@@ -25,10 +25,10 @@
     "nookies": "^2.5.2",
     "pg": "^8.13.0",
     "socket.io": "^4.7.4",
-    "socket.io-client": "^4.8.0"
+    "socket.io-client": "^4.8.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
   }
 }
-

@@ -5,6 +5,7 @@ export const createComment = async (req, res) => {
 	try {
 		const { content, postId } = req.body;
 		const userId = req.user.id;
+        console.log(userId);
 
 		if (!content || !postId) {
 			return res.status(400).json({ error: 'Content and postId are required' });

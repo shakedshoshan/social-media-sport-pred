@@ -1,66 +1,92 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useAuth from '../zustand/useAuth';
+import { useState } from 'react'
+import { LogOut, Menu, TrendingUp, Table } from "lucide-react"
+import LogoutButton from './logoutButton.jsx' 
 
-const Header = () => {
-  const [showProfileHover, setShowProfileHover] = useState(false);
-  const { authUser } = useAuth();
 
+export default function Header({ userName = "John Doe", userImage = "/vite.svg" }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+ 
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 flex justify-between items-center shadow-lg transition-shadow duration-300">
-      <Link to="/">
-        <img src="/logo.png" alt="Sports Social Logo" className="h-12 w-auto" />
-      </Link>
-      <nav className="flex items-center space-x-4 md:space-x-6">
-        <Link
-          to="/tables"
-          className="px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-300"
-        >
-          Tables
-        </Link>
-        <Link
-          to="/predictions"
-          className="px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-300"
-        >
-          Predictions
-        </Link>
-        <div
-          className="flex items-center relative cursor-pointer"
-          onMouseEnter={() => setShowProfileHover(true)}
-          onMouseLeave={() => setShowProfileHover(false)}
-        >
-          <img
-            src={authUser.profilePic}
-            alt={authUser.name}
-            className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
-          />
-          <span className="ml-3 font-semibold">{authUser.name}</span>
-          {showProfileHover && (
-            <div className="absolute right-0 mt-12 w-40 bg-white text-gray-800 rounded-lg shadow-lg border border-gray-200">
-              <Link
-                to="/profile"
-                className="block px-4 py-2 hover:bg-gray-100 rounded-t-lg"
-              >
-                Visit Profile
-              </Link>
-              <Link
-                to="/settings"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
-                Settings
-              </Link>
-              <Link
-                to="/logout"
-                className="block px-4 py-2 hover:bg-gray-100 rounded-b-lg"
-              >
-                Logout
-              </Link>
-            </div>
-          )}
-        </div>
-      </nav>
-    </header>
-  );
-};
+    <header className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-primary-foreground shadow-lg bg-[#141d4d]">
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-row items-center space-x-4">
+            <a href="/">
+              <img src="/logo.png" alt="Logo" width={48} height={48} className="transition-transform hover:scale-110" />
+            </a>
+            <h1 className="text-3xl text-white font-bold">GuessZone</h1>
+          </div>
+          
+          <div className="hidden md:flex items-center space-x-6">
+            <a href="/predictions" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
+              <TrendingUp size={20} />
+              <span>Predictions</span>
+            </a>
+            <a href="/mytables" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
+              <Table size={20} />
+              <span>My Tables</span>
+            </a>
+            <a href="/profile" className="flex items-center space-x-3 group hover:cursor-pointer hover:bg-[#26337e] hover:rounded-lg p-2">
+              <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary-foreground/30 transition-all duration-300 group-hover:ring-primary-foreground/60">
+                <img
+                  src={userImage}
+                  alt={`${userName}'s profile`}
+                  width={40}
+                  height={40}
+                  className="object-cover transition-transform group-hover:scale-110"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg text-white font-medium">{userName}</span>
+              </div>
+            </a>
+            <LogoutButton />
+          </div>
 
-export default Header;
+          {/* Mobile menu button */}
+          <button
+            variant="ghost"
+            size="icon"
+            className="md:hidden text-primary-foreground hover:bg-primary-foreground/10"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="mt-4 py-4 border-t border-primary-foreground/10 md:hidden">
+            <div className="flex flex-col space-y-4">
+              <a href="/predictions" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
+                <TrendingUp size={20} />
+                <span>Predictions</span>
+              </a>
+              <a href="/mytables" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
+                <Table size={20} />
+                <span>My Tables</span>
+              </a>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <img
+                      src={userImage}
+                      alt={`${userName}'s profile`}
+                      width={40}
+                      height={40}
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-white">{userName}</span>
+                  </div>
+                </div>
+                <LogoutButton />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  )
+}

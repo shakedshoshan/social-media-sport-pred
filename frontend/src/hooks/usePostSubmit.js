@@ -5,7 +5,7 @@ const usePostSubmit = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const submitPost = async (title, content, guess) => {
+  const submitPost = async (content, guess) => {
     setIsLoading(true);
     setError(null);
 
@@ -16,7 +16,7 @@ const usePostSubmit = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, content, guess }),
+        body: JSON.stringify({ content, guess }),
       });
 
       if (!response.ok) {

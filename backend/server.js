@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from './routes/auth.routes.js';
 import postRoutes from './routes/post.routes.js';
 import commentRoutes from './routes/comment.routes.js';
-
+import groupRoutes from './routes/group.routes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
-
+app.use("/api/group", groupRoutes);
 // Routes
 app.get('/', (req, res) => {
   res.send('Hello World!');

@@ -14,7 +14,6 @@ CREATE TABLE users (
 -- Create the posts table
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     guess VARCHAR(255) NOT NULL,
     likes INT DEFAULT 0,
@@ -35,17 +34,29 @@ CREATE TABLE comments (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- Create the likes table
+CREATE TABLE likes (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    post_id INT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);
+
+
 -- Create the Groups table
 CREATE TABLE groups (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
+    secret_code VARCHAR(6) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE user_groups (
     user_id INT NOT NULL,
     group_id INT NOT NULL,
+    score INT DEFAULT 0,
     joined_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id, group_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
