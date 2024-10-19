@@ -7,7 +7,7 @@ export default function Header({ userName = "John Doe", userImage = "/vite.svg" 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
  
   return (
-    <header className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-primary-foreground shadow-lg bg-[#141d4d]">
+    <header className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-primary-foreground shadow-lg bg-[#141d4d] fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex flex-row items-center space-x-4">

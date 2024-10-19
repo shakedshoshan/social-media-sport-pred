@@ -175,4 +175,43 @@ export const getGroupIdsByUserId = async (req, res) => {
     }
 };
 
+// Get group details by group ID
+export const getGroupDetailsById = async (req, res) => {
+    const groupId = req.params.groupId;
+
+    try {
+        const groupDetails = await pool.query(
+            `SELECT id, name, created_at
+             FROM groups
+             WHERE id = $1`,
+            [groupId]
+        );
+
+        if (groupDetails.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Group not found'
+            });
+        }
+
+        const group = groupDetails.rows[0];
+
+        res.status(200).json({
+            success: true,
+            group: {
+                id: group.id,
+                name: group.name,
+                createdAt: group.created_at
+            }
+        });
+    } catch (error) {
+        console.error('Error getting group details:', error);
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while fetching group details'
+        });
+    }
+};
+
+
 

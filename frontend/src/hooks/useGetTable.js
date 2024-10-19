@@ -5,6 +5,7 @@ const useGetTable = (groupId) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,7 +38,8 @@ const useGetTable = (groupId) => {
       fetchUsers();
     }
   }, [groupId]);
-
+  
+  
   return { users, loading, error };
 };
 

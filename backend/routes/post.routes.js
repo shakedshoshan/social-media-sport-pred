@@ -8,7 +8,7 @@ router.post('/createPost', protectRoute, createPost);
 
 router.delete('/:id', deletePost);
 
-router.get('/getPostsByUser', getPostsByUser);
+router.get('/getPostsByUser', protectRoute, getPostsByUser);
 
 router.get('/getAllPosts', getAllPosts);
 

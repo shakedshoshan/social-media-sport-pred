@@ -5,16 +5,21 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import useGetAllPosts from '../hooks/useGetAllPosts';
 import Post from './post';
+import useGetPostsByUser from '../hooks/useGetPostsByUser';
 
-const PostsCrusel = () => {
-  const { getAllPosts, isLoadingPosts, errorPosts } = useGetAllPosts();
-
+const PostsCrusel = ({page='home'}) => {
   const [posts, setPosts] = useState([]);
+
+  const { getAllPosts, isLoadingPosts, errorPosts } = page === 'home' ? useGetAllPosts() : { getAllPosts: null, isLoadingPosts: false, errorPosts: null };
+  const { posts: MyPosts, loading } = page !== 'home' ? useGetPostsByUser() : { posts: null, loading: false };
+
   useEffect(() => {
-    if (getAllPosts) {
+    if (page === 'home' && getAllPosts) {
       setPosts(getAllPosts);
+    } else if (page !== 'home' && MyPosts) {
+      setPosts(MyPosts);
     }
-  }, [getAllPosts]);
+  }, [page, getAllPosts, MyPosts]);
 
 
 
