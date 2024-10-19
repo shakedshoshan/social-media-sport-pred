@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaUsers, FaCalendarAlt, FaComments, FaTrophy, FaInfoCircle } from 'react-icons/fa';
 import useGetTable from '../hooks/useGetTable';
@@ -10,6 +10,7 @@ const Group = () => {
   const { id } = useParams();
   const { users, loading: tableLoading, error: tableError } = useGetTable(id);
   const { groupDetails, loading: groupDetailsLoading, error: groupDetailsError } = useGetGroupDetails(id);
+
 
   if (tableLoading || groupDetailsLoading) {
     return <div className="text-center py-10">Loading...</div>;

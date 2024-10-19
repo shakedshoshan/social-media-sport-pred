@@ -74,6 +74,58 @@ CREATE TABLE chat_messages (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- Create the events table
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    event_id VARCHAR(255) NOT NULL UNIQUE,
+    event_uuid VARCHAR(255) NOT NULL UNIQUE,
+    sport_id INT NOT NULL,
+    event_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    venue_name VARCHAR(255),
+    venue_location VARCHAR(255),
+    home_team_id INT NOT NULL,
+    away_team_id INT NOT NULL,
+    home_team_name VARCHAR(255) NOT NULL,
+    away_team_name VARCHAR(255) NOT NULL,
+    home_team_mascot VARCHAR(255),
+    away_team_mascot VARCHAR(255),
+    home_team_abbreviation VARCHAR(10),
+    away_team_abbreviation VARCHAR(10),
+    home_team_conference VARCHAR(255),
+    away_team_conference VARCHAR(255),
+    home_team_division VARCHAR(255),
+    away_team_division VARCHAR(255),
+    home_team_record VARCHAR(10),
+    away_team_record VARCHAR(10),
+    season_type VARCHAR(255),
+    season_year INT,
+    broadcast VARCHAR(255),
+    event_status VARCHAR(50),
+    event_status_detail VARCHAR(255),
+    score_home INT DEFAULT 0,
+    score_away INT DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the guesses table
+CREATE TABLE guesses (
+    id SERIAL PRIMARY KEY,
+    event_id VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    winner_team_id INT NOT NULL,
+    point_difference INT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+
+
+
+
 
 
 

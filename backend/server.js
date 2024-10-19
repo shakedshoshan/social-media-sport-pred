@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import db from './db.js';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
+import { updateGames } from './utils/updateGames.js';
 
 import authRoutes from './routes/auth.routes.js';
 import postRoutes from './routes/post.routes.js';
@@ -44,5 +44,7 @@ app.get('/', (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+
+  // updateGames();
 });
 

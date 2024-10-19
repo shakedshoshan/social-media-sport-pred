@@ -9,9 +9,11 @@ import Profile from "./pages/Profile";
 import useAuth from "./zustand/useAuth";
 import MyTables from "./pages/MyTables";
 import Group from "./pages/Group";
+import Prediction from "./pages/Prediction";
+
 function App() {
 	const { authUser } = useAuth();
-	
+
 	return (
 		<div className='flex flex-col w-full'>
 			{authUser && <Header userName={authUser.username} userImage={authUser.profilePic} />}
@@ -21,6 +23,7 @@ function App() {
 					<Route path='/profile' element={authUser ? <Profile /> : <Navigate to={"/login"} />} />
 					<Route path='/mytables' element={authUser ? <MyTables /> : <Navigate to={"/login"} />} />
 					<Route path='/group/:id' element={authUser ? <Group /> : <Navigate to={"/login"} />} />
+					<Route path='/predictions' element={authUser ? <Prediction /> : <Navigate to={"/login"} />} />
 					<Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
 					<Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
 				</Routes>

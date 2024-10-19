@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LogOut, Menu, TrendingUp, Table } from "lucide-react"
+import { LogOut, Menu, TrendingUp, Table, Home } from "lucide-react"
 import LogoutButton from './logoutButton.jsx' 
 
 
@@ -12,12 +12,16 @@ export default function Header({ userName = "John Doe", userImage = "/vite.svg" 
         <div className="flex items-center justify-between">
           <div className="flex flex-row items-center space-x-4">
             <a href="/">
-              <img src="/logo.png" alt="Logo" width={48} height={48} className="transition-transform hover:scale-110" />
+            <h1 className="text-3xl text-white font-bold font-serif tracking-wide">GuessZone</h1>
             </a>
-            <h1 className="text-3xl text-white font-bold">GuessZone</h1>
+            
           </div>
           
           <div className="hidden md:flex items-center space-x-6">
+            <a href="/" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
+              <Home size={20} />
+              <span>Home</span>
+            </a>
             <a href="/predictions" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
               <TrendingUp size={20} />
               <span>Predictions</span>
@@ -58,6 +62,10 @@ export default function Header({ userName = "John Doe", userImage = "/vite.svg" 
         {isMenuOpen && (
           <div className="mt-4 py-4 border-t border-primary-foreground/10 md:hidden">
             <div className="flex flex-col space-y-4">
+              <a href="/" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
+                <Home size={20} />
+                <span>Home</span>
+              </a>
               <a href="/predictions" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
                 <TrendingUp size={20} />
                 <span>Predictions</span>
