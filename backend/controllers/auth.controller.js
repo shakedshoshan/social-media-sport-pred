@@ -123,3 +123,24 @@ export const getUserById = async (req, res) => {
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };
+
+export const searchUsers = async (req, res) => {
+	try {
+		const { query } = req.query;
+
+		if (!query) {
+			return res.status(400).json({ error: "Search query is required" });
+		}
+
+		const result = await pool.query(
+			"SELECT id, username, profilepic FROM users WHERE username ILIKE $1 LIMIT 10",
+			[`%${query}%`]
+		);
+
+		res.status(200).json(result.rows);
+	} catch (error) {
+		console.log("Error in searchUsers controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
+

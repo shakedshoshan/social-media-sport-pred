@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import { updateGames } from './utils/updateGames.js';
+import cron from 'node-cron';
 
 import authRoutes from './routes/auth.routes.js';
 import postRoutes from './routes/post.routes.js';
@@ -10,6 +11,8 @@ import commentRoutes from './routes/comment.routes.js';
 import groupRoutes from './routes/group.routes.js';
 import chatRoutes from './routes/chat.routes.js';
 import followRoutes from './routes/follow.routes.js';
+import eventsRoutes from './routes/events.routes.js';
+import guessRoutes from './routes/guess.routes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -37,6 +40,8 @@ app.use("/api/comment", commentRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/follow", followRoutes);
+app.use("/api/events", eventsRoutes);
+app.use("/api/guess", guessRoutes);
 // Routes
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -46,6 +51,9 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 
-  // updateGames();
+  // Schedule updateGames to run every day at 10 AM
+  cron.schedule('0 10 * * *', () => {
+    console.log('Running updateGames at 10 AM');
+    updateGames();
+  });
 });
-

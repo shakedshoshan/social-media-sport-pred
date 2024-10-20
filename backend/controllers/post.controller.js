@@ -56,15 +56,15 @@ export const deletePost = async (req, res) => {
 
 // Get all posts by user
 export const getPostsByUser = async (req, res) => {
+	
 	try {
-		const userId = req.user.id;
-
+		const {id} = req.body;
 		const query = `
 			SELECT * FROM posts
 			WHERE user_id = $1
 			ORDER BY created_at DESC
 		`;
-		const values = [userId];
+		const values = [id];
 
 		const result = await pool.query(query, values);
 		const posts = result.rows;

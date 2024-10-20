@@ -5,12 +5,12 @@
     import TableCrusel from '../components/TableCrusel';
     import { FaHome, FaTrophy, FaRss, FaBasketballBall } from 'react-icons/fa';
     import CreateJoinButton from '../components/CreateJointButton';
-    import { gameData } from '../assets/gameData';
+    import useGetAllEvents from '../hooks/events/useGetAllEvents';
     import Game from '../components/Game';
       
 
     export default function Home() {
-      const nbaGames = gameData.events;
+      const { events, loading, error } = useGetAllEvents();
       const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
       useEffect(() => {
@@ -68,7 +68,7 @@
                       NBA Games
                     </h2>
                     <div className="space-y-4">
-                      {nbaGames.slice(0, 3).map((game) => (
+                      {events.slice(0, 3).map((game) => (
                         <Game key={game.event_id} game={game} />
                       ))}
                     </div>

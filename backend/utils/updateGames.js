@@ -1,4 +1,5 @@
 import pool from '../db.js';
+import { gameData } from '../../frontend/src/assets/gameData.js';
 
 export const updateGames = async () => {
     const getThreeDaysFromNow = () => {
@@ -7,24 +8,25 @@ export const updateGames = async () => {
     return threeDaysFromNow.toISOString().split('T')[0];
   };
 
-  const targetDate = getThreeDaysFromNow();
-  const url = `https://therundown-therundown-v1.p.rapidapi.com/sports/4/events/${targetDate}?include=scores&affiliate_ids=1%2C2%2C3&offset=0`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'x-rapidapi-key': '948f8b4495mshce728272b155600p12d3a9jsndb97509bab0d',
-	  'x-rapidapi-host': 'therundown-therundown-v1.p.rapidapi.com'
-    }
-  };
+//   const targetDate = getThreeDaysFromNow();
+//   const url = `https://therundown-therundown-v1.p.rapidapi.com/sports/4/events/${targetDate}?include=scores&affiliate_ids=1%2C2%2C3&offset=0`;
+//   const options = {
+//     method: 'GET',
+//     headers: {
+//       'x-rapidapi-key': '948f8b4495mshce728272b155600p12d3a9jsndb97509bab0d',
+// 	  'x-rapidapi-host': 'therundown-therundown-v1.p.rapidapi.com'
+//     }
+//   };
 
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const gameData = await response.json();
+    // const response = await fetch(url, options);
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! status: ${response.status}`);
+    // }
+    // const gameData = await response.json();
 
     const events = gameData.events;
+    console.log(events);
 
     for (const event of events) {
       const {

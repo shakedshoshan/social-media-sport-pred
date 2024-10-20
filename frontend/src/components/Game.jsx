@@ -1,10 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NBALogos } from '../assets/NBA-logos';
+import useCreateGuess from '../hooks/guess/useCreateGuess';
+import useGetGuess from '../hooks/guess/useGetGuess';
 
 const Game = ({ game }) => {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [pointDifference, setPointDifference] = useState('');
+  const { createGuess, isLoading, error } = useCreateGuess();
+  const { getGuess, isLoading: getGuessLoading, error: getGuessError } = useGetGuess();
+  const [currentGuess, setCurrentGuess] = useState(null);
+  
 
+
+  useEffect(() => {
+    const fetchGuess = async () => {
+      try {
+        const data = await getGuess(game.event_id);
+        console.log(data);
+        setCurrentGuess(data);
+      } catch (error) {
+        console.error('Error fetching guess:', error);
+      }
+    };
+
+    fetchGuess();
+  }, []);
+
+//   console.log(currentGuess?.guess);
+
+  
+
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const handleTeamSelect = (teamId) => {
     setSelectedTeam(teamId);
   };
@@ -13,8 +40,29 @@ const Game = ({ game }) => {
     setPointDifference(e.target.value);
   };
 
-  const awayTeam = game.teams_normalized.find(team => team.is_away);
-  const homeTeam = game.teams_normalized.find(team => team.is_home);
+  const handleSubmit = () => {
+    createGuess(game.event_id, selectedTeam, pointDifference);
+    setIsSubmitted(true);
+    // Reset the form after submission
+    // setSelectedTeam(null);
+    // setPointDifference('');
+  };
+
+  const awayTeam = {
+    team_id: game.away_team_id,
+    name: game.away_team_name,
+    mascot: game.away_team_mascot,
+    record: game.away_team_record,
+    abbreviation: game.away_team_abbreviation
+  };
+
+  const homeTeam = {
+    team_id: game.home_team_id,
+    name: game.home_team_name,
+    mascot: game.home_team_mascot,
+    record: game.home_team_record,
+    abbreviation: game.home_team_abbreviation
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -31,7 +79,7 @@ const Game = ({ game }) => {
         <div className="flex justify-between items-center mb-3 sm:mb-4">
           <div className="text-center">
             <img src={NBALogos[awayTeam.mascot]} alt={`${awayTeam.name} logo`} className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-1 sm:mb-2" />
-            <p className="font-bold text-sm sm:text-base">{awayTeam.name} </p>
+            <p className="font-bold text-sm sm:text-base">{awayTeam.name}</p>
             <p className="text-xs font-semibold sm:text-sm text-gray-600">{awayTeam.mascot}</p>
             <p className="text-xs sm:text-sm text-gray-600">{awayTeam.record}</p>
           </div>
@@ -41,13 +89,13 @@ const Game = ({ game }) => {
           </div>
           <div className="text-center">
             <img src={NBALogos[homeTeam.mascot]} alt={`${homeTeam.name} logo`} className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-1 sm:mb-2" />
-            <p className="font-bold text-sm sm:text-base">{homeTeam.name} </p>
+            <p className="font-bold text-sm sm:text-base">{homeTeam.name}</p>
             <p className="text-xs font-semibold sm:text-sm text-gray-600">{homeTeam.mascot}</p>
             <p className="text-xs sm:text-sm text-gray-600">{homeTeam.record}</p>
           </div>
         </div>
         <div className="text-center text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
-          <p>{game.score.venue_name}, {game.score.venue_location}</p>
+          <p>{game.venue_name}, {game.venue_location}</p>
         </div>
         <div className="mt-4 sm:mt-6 bg-gray-100 rounded-lg p-3 sm:p-4">
           <p className="text-center font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Make your prediction</p>
@@ -66,7 +114,7 @@ const Game = ({ game }) => {
               </button>
             ))}
           </div>
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0">
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 mb-4">
             <label htmlFor="pointDifference" className="mb-1 sm:mb-0 sm:mr-3 font-medium text-sm sm:text-base text-gray-700">Point difference:</label>
             <input
               type="number"
@@ -77,6 +125,19 @@ const Game = ({ game }) => {
               min="1"
               placeholder="0"
             />
+          </div>
+          <div className="flex justify-center">
+            <button
+              onClick={handleSubmit}
+              disabled={!selectedTeam || !pointDifference || isSubmitted}
+              className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                isSubmitted
+                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  : 'bg-blue-800 text-white hover:bg-blue-950'
+              }`}
+            >
+              {isSubmitted ? 'Submitted' : 'Submit Guess'}
+            </button>
           </div>
         </div>
       </div>

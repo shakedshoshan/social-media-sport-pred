@@ -1,5 +1,5 @@
 import express from 'express';
-import {login, signup, logout, getUserById} from "../controllers/auth.controller.js";
+import {login, signup, logout, getUserById, searchUsers} from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
@@ -11,4 +11,5 @@ router.post('/logout', logout);
 
 router.get('/user/:id', getUserById);
 
+router.get('/search', searchUsers);
 export default router;

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { LogOut, Menu, TrendingUp, Table, Home } from "lucide-react"
 import LogoutButton from './logoutButton.jsx' 
+import SearchUser from './SearchUser'
 
 
 export default function Header({ userName = "John Doe", userImage = "/vite.svg" }) {
@@ -18,6 +19,9 @@ export default function Header({ userName = "John Doe", userImage = "/vite.svg" 
           </div>
           
           <div className="hidden md:flex items-center space-x-6">
+          <div className="w-full md:w-auto">
+            <SearchUser />
+          </div>
             <a href="/" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
               <Home size={20} />
               <span>Home</span>
@@ -62,6 +66,7 @@ export default function Header({ userName = "John Doe", userImage = "/vite.svg" 
         {isMenuOpen && (
           <div className="mt-4 py-4 border-t border-primary-foreground/10 md:hidden">
             <div className="flex flex-col space-y-4">
+            <SearchUser />
               <a href="/" className="flex items-center space-x-2 text-white hover:text-blue-200 transition-colors duration-200">
                 <Home size={20} />
                 <span>Home</span>

@@ -5,6 +5,7 @@
     import CommentForm from './CommentForm';
     import useCheckLiked from '../hooks/useCheckLiked';
     import FollowButton from './FollowButton';
+    import { Link } from 'react-router-dom';
     
     const Post = ({ post }) => {
       const { user, isLoading, error } = useGetUser(post.user_id);
@@ -38,21 +39,23 @@
           <div className="p-3 sm:p-4">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
               <div className="flex items-center">
-                {user?.profilepic ? (
-                  <img
-                    src={user.profilepic}
-                    alt={`${user?.username}'s profile`}
-                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 object-cover border-2 border-blue-500"
-                  />
-                ) : (
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 bg-blue-500 flex items-center justify-center text-white font-bold">
-                    <span>{user?.username?.charAt(0).toUpperCase()}</span>
+                <Link to={`/user/${post.user_id}`} className="flex items-center">
+                  {user?.profilepic ? (
+                    <img
+                      src={user.profilepic}
+                      alt={`${user?.username}'s profile`}
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 object-cover border-2 border-blue-500"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 bg-blue-500 flex items-center justify-center text-white font-bold">
+                      <span>{user?.username?.charAt(0).toUpperCase()}</span>
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="font-semibold text-sm sm:text-lg">{user?.username}</h3>
+                    <p className="text-xs text-gray-500">{new Date(post.created_at).toLocaleString()}</p>
                   </div>
-                )}
-                <div>
-                  <h3 className="font-semibold text-sm sm:text-lg">{user?.username}</h3>
-                  <p className="text-xs text-gray-500">{new Date(post.created_at).toLocaleString()}</p>
-                </div>
+                </Link>
               </div>
               <FollowButton followedId={post.user_id} />
             </div>

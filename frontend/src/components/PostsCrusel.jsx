@@ -7,11 +7,11 @@ import useGetAllPosts from '../hooks/useGetAllPosts';
 import Post from './post';
 import useGetPostsByUser from '../hooks/useGetPostsByUser';
 
-const PostsCrusel = ({page='home'}) => {
+const PostsCrusel = ({page='home',id}) => {
   const [posts, setPosts] = useState([]);
 
   const { getAllPosts, isLoadingPosts, errorPosts } = page === 'home' ? useGetAllPosts() : { getAllPosts: null, isLoadingPosts: false, errorPosts: null };
-  const { posts: MyPosts, loading } = page !== 'home' ? useGetPostsByUser() : { posts: null, loading: false };
+  const { posts: MyPosts, loading } = page !== 'home' ? useGetPostsByUser({id}) : { posts: null, loading: false };
 
   useEffect(() => {
     if (page === 'home' && getAllPosts) {
