@@ -10,6 +10,7 @@ import useAuth from "./zustand/useAuth";
 import MyTables from "./pages/MyTables";
 import Group from "./pages/Group";
 import Prediction from "./pages/Prediction";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
 	const { authUser } = useAuth();
@@ -24,6 +25,7 @@ function App() {
 					<Route path='/mytables' element={authUser ? <MyTables /> : <Navigate to={"/login"} />} />
 					<Route path='/group/:id' element={authUser ? <Group /> : <Navigate to={"/login"} />} />
 					<Route path='/predictions' element={authUser ? <Prediction /> : <Navigate to={"/login"} />} />
+					<Route path='/user/:userId' element={authUser ? <UserProfile /> : <Navigate to={"/login"} />} />
 					<Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
 					<Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
 				</Routes>

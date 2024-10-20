@@ -29,6 +29,7 @@ export const login = async (req, res) => {
 			username: user.username,
 			gender: user.gender,
 			profilePic: user.profilepic,
+			created_at: user.created_at,
 		});
 	} catch (error) {
 		console.log("Error in login controller", error.message);
@@ -74,6 +75,7 @@ export const signup = async (req, res) => {
 				username: newUser.rows[0].username,
 				gender: newUser.rows[0].gender,
 				profilePic: newUser.rows[0].profilepic,
+				created_at: newUser.rows[0].created_at,
 			});
 		} else {
 			res.status(400).json({ error: "Invalid user data" });
@@ -106,7 +108,7 @@ export const getUserById = async (req, res) => {
 		const { id } = req.params;
 
 		const result = await pool.query(
-			"SELECT id, username, gender, profilepic FROM users WHERE id = $1",
+			"SELECT id, username, gender, profilepic, created_at FROM users WHERE id = $1",
 			[id]
 		);
 

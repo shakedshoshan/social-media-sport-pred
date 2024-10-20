@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 const useGetUser = (userId) => {
   const [user, setUser] = useState(null);
@@ -37,6 +36,7 @@ const useGetUser = (userId) => {
       fetchUser();
     }
   }, [userId]);
+  
 
   return { user, isLoading, error };
 };

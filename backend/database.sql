@@ -121,6 +121,22 @@ CREATE TABLE guesses (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- Create the follows table
+CREATE TABLE follows (
+    id SERIAL PRIMARY KEY,
+    follower_id INT NOT NULL,
+    followed_id INT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (followed_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE (follower_id, followed_id)
+);
+
+-- Create an index to improve query performance
+CREATE INDEX idx_follower_followed ON follows (follower_id, followed_id);
+
+
+
 
 
 

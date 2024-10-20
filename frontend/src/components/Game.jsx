@@ -55,7 +55,7 @@ const Game = ({ game }) => {
             {[awayTeam, homeTeam].map((team) => (
               <button
                 key={team.team_id}
-                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 ${
+                className={`px-2 sm:px-3 py-1 sm:py-2 rounded-full transition-all duration-300 ${
                   selectedTeam === team.team_id
                     ? 'bg-blue-500 text-white shadow-lg transform scale-105'
                     : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'

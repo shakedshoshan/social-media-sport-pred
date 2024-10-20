@@ -54,7 +54,7 @@ export default function Header({ userName = "John Doe", userImage = "/vite.svg" 
             className="md:hidden text-primary-foreground hover:bg-primary-foreground/10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-6 w-6 text-white" />
           </button>
         </div>
 

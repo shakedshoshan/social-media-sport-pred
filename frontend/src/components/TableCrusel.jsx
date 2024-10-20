@@ -10,7 +10,7 @@ const TableCrusel = ({slice = 3, page = 'home'}) => {
 
   return (
     <>
-      {page === 'home' || page === 'profile' ? (
+      {page === 'home' || 'profile' ? (
         <div className="overflow-x-auto space-y-10">
           {groups.slice(0, slice).map((group, index) => (
             <div key={index} className="mb-8 ">
