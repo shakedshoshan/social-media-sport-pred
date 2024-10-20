@@ -4,19 +4,19 @@ export const gameData = {
     },
     "events": [
         {
-            "event_id": "233a03704268689c30416c1391025535",
-            "event_uuid": "11ef-90e2-829b5000-8a4a-3423fd450855",
+            "event_id": "233a03704268689c30416c13910255gg",
+            "event_uuid": "11ef-90e2-829b5000-8a4a-3423fd4508gg",
             "sport_id": 4,
             "event_date": "2024-10-23T02:00:00Z",
             "score": {
-                "event_id": "233a03704268689c30416c1391025535",
-                "event_status": "STATUS_SCHEDULED",
+                "event_id": "233a03704268689c30416c13910255gg",
+                "event_status": "STATUS_FINAL",
                 "team_id_away": 17,
                 "team_id_home": 23,
                 "winner_away": 0,
                 "winner_home": 0,
-                "score_away": 0,
-                "score_home": 0,
+                "score_away": 90,
+                "score_home": 100,
                 "score_away_by_period": [],
                 "score_home_by_period": [],
                 "venue_name": "crypto.com Arena",
@@ -653,3 +653,6 @@ export const gameData = {
         }
     ]
 }
+
+
+

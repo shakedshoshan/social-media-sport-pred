@@ -36,7 +36,7 @@ export default function Profile() {
                 <FaHome className="mr-2 text-green-500" />
                 Your Posts
               </h2>
-              <PostsCrusel page='profile' />
+              <PostsCrusel page='profile' id={authUser.id} />
             </div>
           </div>
         </div>

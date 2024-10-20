@@ -81,18 +81,20 @@ export default function Header({ userName = "John Doe", userImage = "/vite.svg" 
               </a>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full overflow-hidden">
-                    <img
-                      src={userImage}
-                      alt={`${userName}'s profile`}
-                      width={40}
-                      height={40}
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium text-white">{userName}</span>
-                  </div>
+                  <a href="/profile" className="flex items-center space-x-3 hover:bg-[#26337e] hover:rounded-lg p-2">
+                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                      <img
+                        src={userImage}
+                        alt={`${userName}'s profile`}
+                        width={40}
+                        height={40}
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium text-white">{userName}</span>
+                    </div>
+                  </a>
                 </div>
                 <LogoutButton />
               </div>

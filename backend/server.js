@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import { updateGames } from './utils/updateGames.js';
+import { updateScores } from './utils/updateTables.js';
 import cron from 'node-cron';
 
 import authRoutes from './routes/auth.routes.js';
@@ -50,10 +51,22 @@ app.get('/', (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  // updateGames();
+  // updateScores('2024-10-23');
 
   // Schedule updateGames to run every day at 10 AM
   cron.schedule('0 10 * * *', () => {
     console.log('Running updateGames at 10 AM');
-    updateGames();
+    const today = new Date();
+    const todayDate = today.toISOString().split('T')[0];
+    updateGames(todayDate);
+  });
+
+  // Schedule updateScores to run every day at 10 AM with today's date
+  cron.schedule('0 10 * * *', () => {
+    console.log('Running updateScores at 10 AM');
+    const today = new Date();
+    const todayDate = today.toISOString().split('T')[0];
+    updateScores(todayDate);
   });
 });
