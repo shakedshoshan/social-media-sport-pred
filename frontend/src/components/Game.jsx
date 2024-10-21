@@ -148,14 +148,18 @@
               ) : (
                 <>
                 
-                  {currentGuess && (
-                    <div className="text-center ">
-                      <p className="text-sm sm:text-base text-gray-800">Your Guess:</p>
-                      <p className="text-xl sm:text-xl font-bold">
-                        {guessedTeamName} by {pointDifference} {pointDifference === '1' ? 'point' : 'points'}
-                      </p>
-                    </div>
-                  )}
+                  <div className="text-center h-24 flex flex-col justify-center">
+                    {currentGuess ? (
+                      <>
+                        <p className="text-sm sm:text-base text-gray-800">Your Guess:</p>
+                        <p className="text-md sm:text-xl font-semibold">
+                          {guessedTeamName} by {pointDifference} {pointDifference === '1' ? 'point' : 'points'}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="text-sm sm:text-base text-gray-800">You did not submit a guess</p>
+                    )}
+                  </div>
                 </>
               )}
             </div>

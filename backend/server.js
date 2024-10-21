@@ -55,7 +55,7 @@ app.listen(port, () => {
   // updateScores('2024-10-23');
 
   // Schedule updateGames to run every day at 10 AM
-  cron.schedule('0 10 * * *', () => {
+  cron.schedule('0 11 * * *', () => {
     console.log('Running updateGames at 10 AM');
     const today = new Date();
     const todayDate = today.toISOString().split('T')[0];
@@ -63,7 +63,7 @@ app.listen(port, () => {
   });
 
   // Schedule updateScores to run every day at 10 AM with today's date
-  cron.schedule('0 10 * * *', () => {
+  cron.schedule('0 11 * * *', () => {
     console.log('Running updateScores at 10 AM');
     const today = new Date();
     const todayDate = today.toISOString().split('T')[0];

@@ -138,17 +138,25 @@ CREATE INDEX idx_follower_followed ON follows (follower_id, followed_id);
 
 
 
+-- Create a function to remove old events and their associated guesses
+CREATE OR REPLACE FUNCTION remove_old_events() RETURNS TRIGGER AS $$
+BEGIN
+    -- Delete events older than 5 days
+    DELETE FROM events
+    WHERE event_date < (CURRENT_TIMESTAMP - INTERVAL '5 days');
+    
+    -- The associated guesses will be automatically deleted due to the CASCADE option
+    -- in the foreign key constraint of the guesses table
+    
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create a trigger to run the function daily
+CREATE TRIGGER trigger_remove_old_events
+AFTER INSERT ON events
+EXECUTE FUNCTION remove_old_events();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+-- write me trigger (for postgresql) that if event id was more than 5 day from the current date so the event will remove, also all the guesses with same event id will remove
