@@ -150,6 +150,7 @@
                 
                   <div className="text-center h-24 flex flex-col justify-center">
                     {currentGuess ? (
+                    
                       <>
                         <p className="text-sm sm:text-base text-gray-800">Your Guess:</p>
                         <p className="text-md sm:text-xl font-semibold">
