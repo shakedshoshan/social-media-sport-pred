@@ -1,4 +1,5 @@
 import pool from '../db.js';
+import redisClient from '../redis.js';
 
 export const getEvent = async (req, res) => {
     const { eventId } = req.params;
@@ -23,6 +24,15 @@ export const getEvent = async (req, res) => {
 };
 
 export const getAllEvents = async (req, res) => {
+    const cacheKey = 'allEvents';
+    const cachedEvents = await redisClient.get(cacheKey);
+
+    if (cachedEvents) {
+        return res.status(200).json(JSON.parse(cachedEvents));
+    }
+
+
+
     try {
         const query = `
             SELECT *
@@ -31,7 +41,10 @@ export const getAllEvents = async (req, res) => {
         `;
         const result = await pool.query(query);
 
+        await redisClient.set(cacheKey, JSON.stringify(result.rows), 'EX', 3600); // Cache for 1 hour
+
         res.status(200).json(result.rows);
+
     } catch (error) {
         console.error('Error fetching all events:', error);
         res.status(500).json({ error: "Internal server error" });

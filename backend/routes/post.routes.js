@@ -1,6 +1,7 @@
 import express from 'express';
 import { createPost, deletePost, getPostsByUser, getAllPosts, addLikeToPost, removeLikeFromPost, checkIfUserLikedPost } from "../controllers/post.controller.js";
 import protectRoute from "../middleware/protectRoute.js";
+import cache from "../middleware/cachingItem.js";
 
 const router = express.Router();
 

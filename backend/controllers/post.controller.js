@@ -81,6 +81,8 @@ export const getPostsByUser = async (req, res) => {
 };
 
 // Get all posts
+
+
 export const getAllPosts = async (req, res) => {
 	try {
 		const query = `

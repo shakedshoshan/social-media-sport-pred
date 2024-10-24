@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import { updateGames } from './utils/updateGames.js';
 import { updateScores } from './utils/updateTables.js';
 import cron from 'node-cron';
+import redisClient from './redis.js';
+
 
 import authRoutes from './routes/auth.routes.js';
 import postRoutes from './routes/post.routes.js';
@@ -48,6 +50,20 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+
+
+// const redisClient = createClient({
+//   url: 'redis://localhost:6379',
+// });
+
+redisClient.connect().then(() => {
+  console.log('Connected to Redis successfully');
+}).catch((err) => {
+  console.log('Redis Connection Error:', err);
+});
+
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
@@ -74,11 +90,4 @@ app.listen(port, () => {
     updateScores(todayDate);
   });
 
-  // Schedule updateScores to run every day at 10 AM with today's date
-  // cron.schedule('1 11 * * *', () => {
-  //   console.log('Running updateScores at 10 AM');
-  //   const today = new Date();
-  //   const todayDate = today.toISOString().split('T')[0];
-  //   updateScores(todayDate);
-  // });
 });
