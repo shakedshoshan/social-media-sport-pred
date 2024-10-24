@@ -1,14 +1,15 @@
 import pool from '../db.js';
 import { gameData } from '../../frontend/src/assets/gameData.js';
 
-export const updateGames = async () => {
+export const updateGames = async (date) => {
     const getThreeDaysAhead = () => {
-    const date = new Date();
-    date.setDate(date.getDate() + 3);
-    return date.toISOString().split('T')[0];
-  };
+        const date = new Date();
+        date.setDate(date.getDate() + 3);
+        return date.toISOString().split('T')[0];
+    };
+  
 
-  const targetDate = getThreeDaysAhead();
+  const targetDate = date ? date : getThreeDaysAhead();
   const url = `https://therundown-therundown-v1.p.rapidapi.com/sports/4/events/${targetDate}?include=scores&affiliate_ids=1%2C2%2C3&offset=0`;
   const options = {
     method: 'GET',
@@ -24,10 +25,8 @@ export const updateGames = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const CurrentgameData = await response.json();
-    console.log(CurrentgameData);
-
+  
     const events = CurrentgameData ? CurrentgameData.events : gameData.events;
-    // console.log(events);
 
     for (const event of events) {
       const {

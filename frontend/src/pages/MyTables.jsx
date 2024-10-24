@@ -15,7 +15,7 @@ const MyTables = () => {
           <div className="mb-6 max-w-sm mx-auto">
             <CreateJoinButton />
           </div>
-          <div className="space-y-8 mt-6">
+          <div className="space-y-8 mt-6 ">
             <TableCrusel slice={100} page='mytables'/>
           </div>
         </div>

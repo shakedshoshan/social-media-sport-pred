@@ -19,13 +19,16 @@ const Prediction = () => {
     return grouped;
   };
 
-  const groupedGames = events && events.length > 0 ? groupGamesByDate(events) : {};
+  
 
-  // Sort dates in ascending order
-  const sortedDates = Object.keys(groupedGames).sort((a, b) => new Date(a) - new Date(b));
+  
 
   const finalGames = events ? events.filter(game => game.event_status === 'STATUS_FINAL') : [];
-  const otherGames = events ? events.filter(game => game.event_status !== 'STATUS_FINAL') : [];
+  const otherGames = events ? events.filter(game => game.event_status === 'STATUS_SCHEDULED') : [];
+
+  const groupedGames = events && events.length > 0 ? groupGamesByDate(otherGames) : {};
+  // Sort dates in ascending order
+  const sortedDates = Object.keys(groupedGames).sort((a, b) => new Date(a) - new Date(b));
 
   return (
     <div className="container mx-auto p-4">
