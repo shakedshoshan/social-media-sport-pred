@@ -41,7 +41,7 @@ export const getAllEvents = async (req, res) => {
         `;
         const result = await pool.query(query);
 
-        await redisClient.set(cacheKey, JSON.stringify(result.rows), 'EX', 3600); // Cache for 1 hour
+        await redisClient.set(cacheKey, JSON.stringify(result.rows), 'EX', 1800); // Cache for 30 minutes
 
         res.status(200).json(result.rows);
 

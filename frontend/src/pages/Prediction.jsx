@@ -18,9 +18,6 @@ const Prediction = () => {
     });
     return grouped;
   };
-
-  
-
   
 
   const finalGames = events ? events.filter(game => game.event_status === 'STATUS_FINAL') : [];

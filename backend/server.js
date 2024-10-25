@@ -6,6 +6,7 @@ import { updateGames } from './utils/updateGames.js';
 import { updateScores } from './utils/updateTables.js';
 import cron from 'node-cron';
 import redisClient from './redis.js';
+import {getGameReview} from './utils/gameReviewScraper.js';
 
 
 import authRoutes from './routes/auth.routes.js';
@@ -16,6 +17,7 @@ import chatRoutes from './routes/chat.routes.js';
 import followRoutes from './routes/follow.routes.js';
 import eventsRoutes from './routes/events.routes.js';
 import guessRoutes from './routes/guess.routes.js';
+import gamePreviewRoutes from './routes/gamePreview.routes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -45,16 +47,12 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/follow", followRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/guess", guessRoutes);
+app.use("/api/gamePreview", gamePreviewRoutes);
 // Routes
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-
-
-// const redisClient = createClient({
-//   url: 'redis://localhost:6379',
-// });
 
 redisClient.connect().then(() => {
   console.log('Connected to Redis successfully');
@@ -67,12 +65,21 @@ redisClient.connect().then(() => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  // updateGames();
-  // updateScores('2024-10-23');
+  
+
+  // getGameReview('Utah Jazz', 'Golden State Warriors', '2024-10-26')
+  //   .then(review => {
+  //     console.log("review: ", review);
+  //   })
+  //   .catch(error => {
+  //     console.error("Error getting game review:", error);
+  //   });
+  
+
 
   // Schedule updateGames to run every day at 10 AM
-  cron.schedule('00 13 * * *', () => {
-    console.log('Running updateGames at 10 AM');
+  cron.schedule('41 13 * * *', () => {
+    console.log('Running updateGames at 13 PM');
     const today = new Date();
     const todayDate = today.toISOString().split('T')[0];
     // Get yesterday's date
