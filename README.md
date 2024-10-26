@@ -1,6 +1,6 @@
 # Social Media Sport Prediction App
 
-This project is a comprehensive social media platform focused on sports predictions. It allows users to engage with sports events by making predictions, joining groups, and interacting with other users through posts, comments, and real-time chat.
+This project is a comprehensive social media platform focused on sports predictions. It allows users to engage with sports events by making predictions, joining groups, and interacting with other users through posts, comments, and chat.
 
 ## Features
 
