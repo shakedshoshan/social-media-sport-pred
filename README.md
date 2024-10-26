@@ -8,7 +8,7 @@ This project is a comprehensive social media platform focused on sports predicti
 - **Post Creation**: Users can create posts with content and predictions, sharing their insights and opinions on sports events.
 - **Group Management**: Users can create and join groups using unique secret codes, fostering community interaction and engagement.
 - **Event Predictions**: Users can make predictions on sports events, view others' predictions, and track their prediction history.
-- **Real-time Chat**: Group chat functionality allows users to communicate in real-time, enhancing the interactive experience.
+- **Chat**: Group chat functionality allows users to communicate, enhancing the interactive experience.
 - **User Profiles**: Users can view and manage their profiles, including followers and following lists, and see their activity history.
 - **Responsive Design**: The application is optimized for both desktop and mobile devices, ensuring a seamless user experience across platforms.
 - **Web Scraping**: Utilizes web scraping to gather and display sports event data, providing users with up-to-date information.
@@ -28,9 +28,6 @@ This project is a comprehensive social media platform focused on sports predicti
 
 - **State Management**: 
   - **Zustand**: A small, fast, and scalable state management solution for React.
-
-- **Real-time Communication**: 
-  - **Socket.io**: A library for real-time, bidirectional, and event-based communication.
 
 - **Caching**: 
   - **Redis**: An in-memory data structure store used as a database, cache, and message broker.
