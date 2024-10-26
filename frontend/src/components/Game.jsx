@@ -10,9 +10,9 @@
       const { getGuess, isLoading: getGuessLoading, error: getGuessError } = useGetGuess();
       const [currentGuess, setCurrentGuess] = useState(null);
       const [isSubmitted, setIsSubmitted] = useState(false);
-      const [preview, setPreview] = useState(null);
-      const [isPreviewLoading, setIsPreviewLoading] = useState(false);
-      const [previewError, setPreviewError] = useState(null);
+      // const [preview, setPreview] = useState(null);
+      // const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+      // const [previewError, setPreviewError] = useState(null);
       const [isPreviewOpen, setIsPreviewOpen] = useState(false);
     
       const { event_status, score_home, score_away } = game;
@@ -36,31 +36,31 @@
         // }
       }, []);
     
-      const fetchPreview = async () => {
-        setIsPreviewLoading(true);
-        setPreviewError(null);
-        try {
-          const response = await fetch(
-            `http://localhost:5000/api/gamePreview?team1=${game.away_team_name}&team2=${game.home_team_name}&date=${new Date(
-              game.event_date
-            ).toLocaleDateString()}`,
-            {
-              credentials: 'include',
-              method: 'GET',
-            }
-          );
-          if (!response.ok) {
-            throw new Error('Failed to fetch preview');
-          }
-          const data = await response.json();
-          setPreview(data.review);
-        } catch (error) {
-          console.error('Error fetching preview:', error);
-          setPreviewError(error.message);
-        } finally {
-          setIsPreviewLoading(false);
-        }
-      };
+      // const fetchPreview = async () => {
+      //   setIsPreviewLoading(true);
+      //   setPreviewError(null);
+      //   try {
+      //     const response = await fetch(
+      //       `http://localhost:5000/api/gamePreview?team1=${game.away_team_name}&team2=${game.home_team_name}&date=${new Date(
+      //         game.event_date
+      //       ).toLocaleDateString()}`,
+      //       {
+      //         credentials: 'include',
+      //         method: 'GET',
+      //       }
+      //     );
+      //     if (!response.ok) {
+      //       throw new Error('Failed to fetch preview');
+      //     }
+      //     const data = await response.json();
+      //     setPreview(data.review);
+      //   } catch (error) {
+      //     console.error('Error fetching preview:', error);
+      //     setPreviewError(error.message);
+      //   } finally {
+      //     setIsPreviewLoading(false);
+      //   }
+      // };
     
       const handleTeamSelect = (teamId) => {
         setSelectedTeam(teamId);
@@ -158,7 +158,7 @@
                 {game.venue_name}, {game.venue_location}
               </p>
             </div>
-            {preview && (
+            {game.preview && (
               <div className="mt-4 sm:mt-6 text-center">
                 <button
                   onClick={() => setIsPreviewOpen(!isPreviewOpen)}
@@ -173,7 +173,7 @@
                 <h3 className="text-center font-semibold mb-2 text-lg sm:text-xl text-blue-800">
                   Game Preview
                 </h3>
-                <p className="text-gray-700">{preview}</p>
+                <p className="text-gray-700">{game.preview}</p>
                 <div className="text-center mt-4">
                   <button
                     onClick={() => setIsPreviewOpen(false)}

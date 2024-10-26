@@ -104,6 +104,7 @@ CREATE TABLE events (
     event_status_detail VARCHAR(255),
     score_home INT DEFAULT 0,
     score_away INT DEFAULT 0,
+    preview TEXT DEFAULT '',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

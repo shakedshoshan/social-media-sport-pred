@@ -7,7 +7,7 @@ import { updateScores } from './utils/updateTables.js';
 import cron from 'node-cron';
 import redisClient from './redis.js';
 import {getGameReview} from './utils/gameReviewScraper.js';
-
+import { updateTomorrowPreviews } from './utils/UpdateToDayPreviews.js';
 
 import authRoutes from './routes/auth.routes.js';
 import postRoutes from './routes/post.routes.js';
@@ -65,20 +65,18 @@ redisClient.connect().then(() => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  
-
-  // getGameReview('Utah Jazz', 'Golden State Warriors', '2024-10-26')
-  //   .then(review => {
-  //     console.log("review: ", review);
-  //   })
-  //   .catch(error => {
-  //     console.error("Error getting game review:", error);
-  //   });
-  
-
 
   // Schedule updateGames to run every day at 10 AM
-  cron.schedule('41 13 * * *', () => {
+  cron.schedule('00 11 * * *', () => {
+    // Clean Redis cache for key "allEvents"
+    redisClient.del("allEvents", (err, reply) => {
+      if (err) {
+        console.error('Error clearing Redis cache for allEvents:', err);
+      } else {
+        console.log('Redis cache cleared for allEvents. Removed keys:', reply);
+      }
+    });
+
     console.log('Running updateGames at 13 PM');
     const today = new Date();
     const todayDate = today.toISOString().split('T')[0];
@@ -95,6 +93,9 @@ app.listen(port, () => {
     console.log('Running updateScores at 13 PM');
     updateScores(yesterdayDate);
     updateScores(todayDate);
+
+    console.log('Running updateTomorrowPreviews at 13 PM');
+    updateTomorrowPreviews();
   });
 
 });

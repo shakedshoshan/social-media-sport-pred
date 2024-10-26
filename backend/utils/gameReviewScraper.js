@@ -5,7 +5,8 @@
     
     export async function getGameReview(team1, team2, date) {
         // Construct the search query using the team names
-        const query = `${team1} vs ${team2} ${date} preview`;
+        const query = `${team1} vs ${team2} ${date} preview espn`;
+        console.log("query: ", query);
 
         // Set the Google search URL
         const searchUrl = 'https://www.google.com/search?q=';
@@ -31,7 +32,7 @@
                 const href = $(links[i]).attr('href');
                 // console.log("href: ", href);
                 
-                if (href && href.startsWith('https://www.espn.com.sg/nba/preview')) {
+                if (href && href.startsWith('https://www.espn')) {
                     console.log("href: ", href);
                     // Extract the actual URL from the Google redirect
                     // const url = new URL(href, 'https://www.google.com').searchParams.get('q');

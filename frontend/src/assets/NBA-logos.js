@@ -11,7 +11,7 @@ export const NBALogos = {
   "Warriors": 'nba logos/Golden State Warriors Logo.svg',
   "Rockets": 'nba logos/Houston Rockets Logo.svg',
   "Pacers": 'nba logos/Indiana Pacers Logo.svg',
-  "Clippers": 'nba logos/Los Angles Lakers Logo.svg',
+  "Clippers": 'nba logos/Los Angles Clippers Logo.svg',
   "Lakers": 'nba logos/Los Angles Lakers Logo.svg',
   "Grizzlies": 'nba logos/Memphis Grizzlies Logo.svg',
   "Heat": 'nba logos/Miami Heat Logo.svg',
