@@ -11,7 +11,7 @@ export const NBALogos = {
   "Warriors": 'nba logos/Golden State Warriors Logo.svg',
   "Rockets": 'nba logos/Houston Rockets Logo.svg',
   "Pacers": 'nba logos/Indiana Pacers Logo.svg',
-  "Clippers": 'nba logos/Los Angles Clippers Logo.svg',
+  "Clippers": 'http://content.sportslogos.net/logos/6/236/full/bvv028jd1hhr8ee8ii7a0fg4i.gif',
   "Lakers": 'nba logos/Los Angles Lakers Logo.svg',
   "Grizzlies": 'nba logos/Memphis Grizzlies Logo.svg',
   "Heat": 'nba logos/Miami Heat Logo.svg',
@@ -22,11 +22,12 @@ export const NBALogos = {
   "Thunder": 'nba logos/Oklahoma City Thunder Logo.svg',
   "Magic": 'nba logos/Orlando Magic Logo.svg',
   "76ers": 'nba logos/Philadephia 76ers Logo.svg',
-  "Suns": 'nba logos/Phoenix Suns Logo.svg',
+  "Suns": 'http://content.sportslogos.net/logos/6/238/full/4370_phoenix_suns-primary-2014.png',
   "Trailblazers": 'nba logos/Portland TrailBlazers Logo.svg',
-  "Kings": 'nba logos/Sacramento Kings Logo.svg',
+  "Kings": 'http://content.sportslogos.net/logos/6/240/full/832.gif',
   "Spurs": 'nba logos/San Antonio Spurs Logo.svg',
   "Raptors": 'nba logos/Toronto Raptors Logo.svg',
   "Jazz": 'nba logos/Utah Jazz Logo.svg',
-  "Wizards": 'nba logos/Washington Wizards Logo.svg'
+  "Wizards": 'nba logos/Washington Wizards Logo.svg',
+  "Warriors": 'http://content.sportslogos.net/logos/6/237/full/1000_golden_state_warriors-primary-2017.png'
 };
