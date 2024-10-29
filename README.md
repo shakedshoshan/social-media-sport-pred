@@ -2,6 +2,12 @@
 
 This project is a comprehensive social media platform focused on sports predictions. It allows users to engage with sports events by making predictions, joining groups, and interacting with other users through posts, comments, and chat. The website also show PreGame information (by scraping) to help user to make their guess.
 
+![media sport - pred](https://github.com/user-attachments/assets/ea4e813e-7f23-4110-93b0-515a73571568)
+![sport media - home](https://github.com/user-attachments/assets/caea04de-85c2-4d80-866c-9db90b0f0c58)
+![sport media - table](https://github.com/user-attachments/assets/43ddb421-b35f-431d-a39e-a4dc505a3c39)
+![sport media - user profile](https://github.com/user-attachments/assets/01841eeb-7099-493d-83a1-01e06da8cc99)
+
+
 ## Features
 
 - **User Authentication**: Secure login and signup using JWT-based authentication, ensuring user data privacy and security.
